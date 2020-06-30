@@ -1,5 +1,7 @@
 package jp.co.sample.emp_management.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +20,10 @@ import jp.co.sample.emp_management.repository.EmployeeRepository;
 @Service
 @Transactional
 public class EmployeeService {
-
 	@Autowired
 	private EmployeeRepository employeeRepository;
+	
+	SimpleDateFormat dateFormatter=new SimpleDateFormat("yyyy年MM月dd日");
 	
 	/**
 	 * 従業員情報を全件取得します.
@@ -29,6 +32,10 @@ public class EmployeeService {
 	 */
 	public List<Employee> showList() {
 		List<Employee> employeeList = employeeRepository.findAll();
+		for(int i=0;i<employeeList.size();i++) {
+			String afterFormatDate=dateFormatter.format(employeeList.get(i).getHireDate());
+			employeeList.get(i).setStrHireDate(afterFormatDate);
+		}
 		return employeeList;
 	}
 	
@@ -41,6 +48,8 @@ public class EmployeeService {
 	 */
 	public Employee showDetail(Integer id) {
 		Employee employee = employeeRepository.load(id);
+		String afterFormatDate=dateFormatter.format(employee.getHireDate());
+		employee.setStrHireDate(afterFormatDate);
 		return employee;
 	}
 	

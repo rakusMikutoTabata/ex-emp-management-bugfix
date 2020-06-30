@@ -14,7 +14,7 @@ public class InsertAdministratorForm {
 	@NotBlank(message = "氏名は必須です")
 	private String name;
 	/** メールアドレス */
-	@NotBlank(message="メールアドレスは必須です")
+	@Pattern(regexp = "^([\\w])+([\\w\\._-])*\\@([\\w])+([\\w\\._-])*\\.([a-zA-Z])+$",message="メールアドレスは正しい形式で入力してください")
 	private String mailAddress;
 	/** パスワード */
 	@Pattern(regexp = "^[a-zA-Z0-9]{8,16}$",message="パスワードは半角英数字で8桁以上16桁以下にしてください")

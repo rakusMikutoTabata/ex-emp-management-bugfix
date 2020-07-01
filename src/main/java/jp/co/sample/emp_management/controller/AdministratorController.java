@@ -69,6 +69,8 @@ public class AdministratorController {
 	 */
 	@RequestMapping("/insert")
 	public String insert(@Validated InsertAdministratorForm form, BindingResult result) {
+		boolean isOriginalMailAddress=false;
+		boolean isSamePassword=false;
 		if (result.hasErrors()) {
 			return toInsert();
 		}
@@ -77,12 +79,19 @@ public class AdministratorController {
 		BeanUtils.copyProperties(form, administrator);
 		if (administratorService.findByMailAddress(administrator.getMailAddress()) != null) {
 			result.rejectValue("mailAddress", null, "このメールアドレスは既に登録されています");
-			return toInsert();
 		} else {
-			administratorService.insert(administrator);
+			isOriginalMailAddress=true;
 		}
 		if (administrator.getPassword().equals(administrator.getConfirmPassword())) {
+			isSamePassword=true;
+		}else {
+			result.rejectValue("password",null,"パスワードと確認用パスワードが一致していません");
 			result.rejectValue("confirmPassword",null,"パスワードと確認用パスワードが一致していません");
+		}
+		if(isOriginalMailAddress==true&&isSamePassword==true) {
+			administratorService.insert(administrator);
+		}else {
+			return toInsert();
 		}
 		return "redirect:/";
 	}

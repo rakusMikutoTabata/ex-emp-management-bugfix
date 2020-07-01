@@ -20,7 +20,7 @@ public class InsertAdministratorForm {
 	@Pattern(regexp = "^[a-zA-Z0-9]{8,16}$", message = "パスワードは半角英数字で8桁以上16桁以下にしてください")
 	private String password;
 	/** 確認用パスワード */
-	@Pattern(regexp = "^[a-zA-Z0-9]{8,16}$", message = "パスワードは半角英数字で8桁以上16桁以下にしてください")
+	@Pattern(regexp = "^[a-zA-Z0-9]{8,16}$", message = "確認用パスワードは半角英数字で8桁以上16桁以下にしてください")
 	private String confirmPassword;
 
 	public String getName() {

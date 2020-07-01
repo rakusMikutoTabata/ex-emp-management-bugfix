@@ -21,19 +21,30 @@ import jp.co.sample.emp_management.repository.EmployeeRepository;
 public class EmployeeService {
 	@Autowired
 	private EmployeeRepository employeeRepository;
-	
-	SimpleDateFormat dateFormatter=new SimpleDateFormat("yyyy年MM月dd日");
-	
+
+	SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy年MM月dd日");
+
 	/**
 	 * 従業員情報を全件取得します.
 	 * 
-	 * @return　従業員情報一覧
+	 * @return 従業員情報一覧
 	 */
 	public List<Employee> showList() {
 		List<Employee> employeeList = employeeRepository.findAll();
 		return employeeList;
 	}
-	
+
+	/**
+	 * 検索欄に入力された氏名から従業員情報をあいまい検索.
+	 * 
+	 * @param name 検索したい従業員の氏名
+	 * @return 検索された従業員情報
+	 */
+	public List<Employee> showListByName(String name) {
+		List<Employee> employeeList = employeeRepository.findByName(name);
+		return employeeList;
+	}
+
 	/**
 	 * 従業員情報を取得します.
 	 * 
@@ -45,11 +56,11 @@ public class EmployeeService {
 		Employee employee = employeeRepository.load(id);
 		return employee;
 	}
-	
+
 	/**
 	 * 従業員情報を更新します.
 	 * 
-	 * @param employee　更新した従業員情報
+	 * @param employee 更新した従業員情報
 	 */
 	public void update(Employee employee) {
 		employeeRepository.update(employee);

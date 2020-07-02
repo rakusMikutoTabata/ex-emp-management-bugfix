@@ -59,7 +59,7 @@ public class EmployeeRepository {
 	 * 検索欄に入力された氏名から従業員情報をあいまい検索.
 	 * 
 	 * @param name 検索したい従業員の氏名
-	 * @return　検索された従業員情報
+	 * @return 検索された従業員情報
 	 */
 	public List<Employee> findByName(String name) {
 		String sql = "select id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count from employees where name like :name order by hire_date";

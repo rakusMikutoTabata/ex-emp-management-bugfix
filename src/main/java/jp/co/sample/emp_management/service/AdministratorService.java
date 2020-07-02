@@ -22,7 +22,7 @@ public class AdministratorService {
 	private AdministratorRepository administratorRepository;
 
 	@Autowired
-	PasswordEncoder passwordEncoder;
+	private PasswordEncoder passwordEncoder;
 
 	/**
 	 * 管理者情報を登録します.
@@ -43,7 +43,7 @@ public class AdministratorService {
 	 */
 	public Administrator login(String mailAddress, String password) {
 		Administrator administrator = administratorRepository.findByMailAddress(mailAddress);
-		if (passwordEncoder.matches(password, administrator.getPassword()) == true) {
+		if (passwordEncoder.matches(password, administrator.getPassword())) {
 			return administrator;
 		}
 		return null;

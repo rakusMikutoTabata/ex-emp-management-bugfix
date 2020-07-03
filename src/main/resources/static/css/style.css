@@ -2,10 +2,24 @@
 
 .error-input {
 	border-color: #ff0000;
-/* 	background-color: #ff0000; */
+	/* 	background-color: #ff0000; */
 	margin-left: 5px;
 }
 
 .error-messages {
 	color: #ff0000;
 }
+
+.selection {
+	display: none;
+}
+
+#page-1 {
+	display: block;
+}
+
+#prev, #next {
+  color: red;
+  cursor: pointer;
+}
+
